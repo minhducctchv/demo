@@ -1,6 +1,6 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.ModelMapperUtil;
+import com.example.demo.util.ModelMapperUtil;
 import com.example.demo.constant.Role;
 import com.example.demo.dto.request.UserRequest;
 import com.example.demo.dto.response.UserResponse;
