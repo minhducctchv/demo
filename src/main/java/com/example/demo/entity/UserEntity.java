@@ -11,18 +11,21 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "user")
 @Table
 @Getter
 @Setter
 @Builder
 public class UserEntity extends BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
+    @Column(nullable = false)
     private String username;
+
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
+    private String email;
     private String roles;
 
     public List<Role> getRoles() {
@@ -35,7 +38,13 @@ public class UserEntity extends BaseEntity {
 
     private LocalDateTime expired;
 
+    @Builder.Default
     private Boolean isEnable = false;
 
+    @Builder.Default
     private LocalDateTime expiredPassword = LocalDateTime.now().plusMonths(3); // 3 thang la phai doi pass
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "otp_id", referencedColumnName = "id")
+    private OtpEntity otp;
 }
